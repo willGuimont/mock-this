@@ -1,1 +1,1 @@
-web: python mock_this.py
+web: gunicorn app:app
