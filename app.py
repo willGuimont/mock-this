@@ -2,6 +2,7 @@ import os
 import random
 
 from flask import Flask, request, jsonify
+import json
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -18,8 +19,9 @@ def mockify(s: str, p: float):
 
 @app.route('/', methods=['GET'])
 def index():
-    content = request.json
-    output = {'mock': mockify(content['message'], p=0.5)}
+    content = request.get_data()
+    json_content = json.loads(content)
+    output = {'mock': mockify(json_content['message'], p=0.5)}
     return jsonify(output)
 
 
