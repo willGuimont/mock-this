@@ -1,3 +1,4 @@
+# Update Pipfile too !
 flask
 gunicorn
 flask-cors
