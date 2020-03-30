@@ -17,10 +17,13 @@ def mockify(s: str, p: float):
     return ''.join(map(lambda x: random_case(x, p), s))
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['POST'])
 def index():
     content = request.get_data()
-    json_content = json.loads(content)
+    try:
+        json_content = json.loads(content)
+    except json.decoder.JSONDecodeError:
+        return '400'
     output = {'mock': mockify(json_content['message'], p=0.5)}
     return jsonify(output)
 
